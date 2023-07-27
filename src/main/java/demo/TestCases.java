@@ -10,8 +10,12 @@ import org.openqa.selenium.By;
 //Selenium Imports
 import org.openqa.selenium.WebElement;
 
-
-
+//Robot Imports
+import java.awt.AWTException;	
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.KeyEvent;
 
 public class TestCases {
     ChromeDriver driver;
@@ -33,6 +37,7 @@ public class TestCases {
 
     }
     
+    //INTV-1/Session-6/3/Activity 3 :Automate_post_on_linkedin
     public void TC_PostOnLinkedin() throws InterruptedException{
         System.out.println("Start Test case: TC_PostOnLinkedin");
         // Load the url  "https://www.linkedin.com/"
@@ -96,5 +101,60 @@ public class TestCases {
          System.out.println("Post does not successful.");        
         System.out.println("end Test case: TC_PostOnLinkedin");
     }
+
+    //INTV-1/Session-7/1/Activity 6: Automate_post_image_or_video_linkedin
+    public void TC_PostImageORVideoOnLinkedin() throws InterruptedException, AWTException{
+        System.out.println("Start Test case: TC_PostImageORVideoOnLinkedin");
+        // Load the url  "https://www.linkedin.com/"
+        driver.get("https://www.linkedin.com/");
+        Thread.sleep(1000);
+        // Locate the Email Id Using Locator "ID" "session_key"
+        WebElement eleUserId = driver.findElement(By.id("session_key"));
+        // Enter emailId  "abcd1234@gmail.com"
+        eleUserId.sendKeys("jyoti.uttarwar@gmail.com");
+        // Locate password Using Locator "ID" "session_password"
+        WebElement elePassword = driver.findElement(By.id("session_password"));
+        // Enter password  "abc1234"
+        elePassword.sendKeys("789893ishita");
+        // Locate & click "SignIn" button Using Locator "XPath" "//button[@data-id='sign-in-form__submit-btn']"
+        WebElement eleSignInBtn = driver.findElement(By.xpath("//button[@data-id='sign-in-form__submit-btn']"));
+        eleSignInBtn.click();
+
+        Thread.sleep(1000); 
+
+        // Locate & click "Post Photo"  Using Locator "XPath" "//button[contains(@aria-label,'Add a photo')]"
+        driver.findElement(By.xpath("//button[contains(@aria-label,'Add a photo')]")).click();
+        Thread.sleep(500); 
+
+        //Select Image by proving path
+        Robot robot = new Robot();
+        String path = System.getProperty("user.dir") + "\\src\\main\\java\\demo\\Images\\img2.jpg";
+        StringSelection imgFilePath = new StringSelection(path);
+        Toolkit.getDefaultToolkit().getSystemClipboard().setContents(imgFilePath, null);
+        Thread.sleep(1000);
+        robot.keyPress(KeyEvent.VK_CONTROL);
+        Thread.sleep(500);
+        robot.keyPress(KeyEvent.VK_V);
+        Thread.sleep(500);
+        robot.keyRelease(KeyEvent.VK_CONTROL);
+        robot.keyPress(KeyEvent.VK_ENTER);
+        robot.keyRelease(KeyEvent.VK_ENTER);
+        Thread.sleep(1000);
+
+        driver.switchTo().activeElement();
+        //Locate & click "Done" button Using Locator "XPath" "//span[text()='Done']"
+        driver.findElement(By.xpath("//span[text()='Done']")).click();
+        //Locate & click "Done" button Using Locator "XPath" "//span[text()='Post']"
+        driver.findElement(By.xpath("//span[text()='Post']")).click();
+
+        Thread.sleep(500);
+        // Verify the status of post & print on console Using Locator "XPath" "//p[@class='artdeco-toast-item__message']/span"
+        WebElement elePostStatus = driver.findElement(By.xpath("//p[@class='artdeco-toast-item__message']/span"));
+        if(elePostStatus.getText().contains("Post successful."))
+         System.out.println("Post successful.");
+        else
+         System.out.println("Post does not successful.");
+        System.out.println("end Test case: TC_PostImageORVideoOnLinkedin");
+    }      
 }
  

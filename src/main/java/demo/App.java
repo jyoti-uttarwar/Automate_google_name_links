@@ -3,15 +3,18 @@
  */
 package demo;
 import java.net.MalformedURLException;
+import java.awt.AWTException;
 
 
 public class App {
-    public void getGreeting() throws InterruptedException, MalformedURLException {
+    public void getGreeting() throws InterruptedException, MalformedURLException, AWTException{
         TestCases tests = new TestCases(); // Initialize your test class
 
-        //TODO: call your test case functions one after other here
+        //INTV-1/Session-6/3/Activity 3 :Automate_post_on_linkedin
+        //tests.TC_PostOnLinkedin();
 
-        tests.TC_PostOnLinkedin();
+        //INTV-1/Session-7/1/Activity 6: Automate_post_image_or_video_linkedin
+        tests.TC_PostImageORVideoOnLinkedin();
 
         //END Tests
 
@@ -19,7 +22,7 @@ public class App {
         tests.endTest(); // End your test by clearning connections and closing browser
     }
 
-    public static void main(String[] args) throws InterruptedException, MalformedURLException {
+    public static void main(String[] args) throws InterruptedException, MalformedURLException, AWTException {
         new App().getGreeting();
     }
 }
