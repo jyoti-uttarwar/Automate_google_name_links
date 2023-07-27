@@ -111,11 +111,11 @@ public class TestCases {
         // Locate the Email Id Using Locator "ID" "session_key"
         WebElement eleUserId = driver.findElement(By.id("session_key"));
         // Enter emailId  "abcd1234@gmail.com"
-        eleUserId.sendKeys("jyoti.uttarwar@gmail.com");
+        eleUserId.sendKeys("abcd1234@gmail.com");
         // Locate password Using Locator "ID" "session_password"
         WebElement elePassword = driver.findElement(By.id("session_password"));
         // Enter password  "abc1234"
-        elePassword.sendKeys("789893ishita");
+        elePassword.sendKeys("abcd1234");
         // Locate & click "SignIn" button Using Locator "XPath" "//button[@data-id='sign-in-form__submit-btn']"
         WebElement eleSignInBtn = driver.findElement(By.xpath("//button[@data-id='sign-in-form__submit-btn']"));
         eleSignInBtn.click();
@@ -126,7 +126,7 @@ public class TestCases {
         driver.findElement(By.xpath("//button[contains(@aria-label,'Add a photo')]")).click();
         Thread.sleep(500); 
 
-        //Select Image by proving path
+        // Select Path Using Robot class  "User Directory Image Folder"
         Robot robot = new Robot();
         String path = System.getProperty("user.dir") + "\\src\\main\\java\\demo\\Images\\img2.jpg";
         StringSelection imgFilePath = new StringSelection(path);
@@ -140,7 +140,7 @@ public class TestCases {
         robot.keyPress(KeyEvent.VK_ENTER);
         robot.keyRelease(KeyEvent.VK_ENTER);
         Thread.sleep(1000);
-
+        //Switch to active window  
         driver.switchTo().activeElement();
         //Locate & click "Done" button Using Locator "XPath" "//span[text()='Done']"
         driver.findElement(By.xpath("//span[text()='Done']")).click();
